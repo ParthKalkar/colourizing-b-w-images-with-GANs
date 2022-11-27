@@ -1,26 +1,39 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { useDropzone } from 'react-dropzone'
 import arrowIcon from './arrow.png'
+import loadingIcon from './loading.jpeg'
 import axios from 'axios';
 
-const URL = 'http://localhost:5000'
+const URL = 'http://localhost:5000/'
 
 function App() {
+
   const [fileDataURL, setFileDataURL] = useState("");
+  const [processedImage, setProcessedImage] = useState("");
+  const [isUploadedImage, setIsUploadedImage] = useState(false);
 
-  const sendImage = async (fileDataURL: string) => {
+  const sendImage = async (file: any) => {
 
-    const data = new FormData();
-    data.append('file', fileDataURL, 'test image');
+    let data = new FormData();
 
-    axios.post(URL, fileDataURL, {
-      headers: {
-        'accept': 'application/json',
-        'Accept-Language': 'en-US,en;q=0.8',
-        'Content-Type': `multipart/form-data; boundary=${fileDataURL._boundary}`,
+    const dot = file.name.lastIndexOf('.');
+
+    data.append('file', file, 'image' + file.name.substring(dot, file.name.length));
+
+    console.log("data", data);
+    const result = await axios.post(URL, data
+      , {
+        headers: {
+          'accept': 'application/json',
+          'Accept-Language': 'en-US,en;q=0.8',
+          'Content-Type': `multipart/form-data;`,
+        }
       }
-    })
+    )
+
+    // setProcessedImage(result.data);
+
   }
 
 
@@ -48,35 +61,43 @@ function App() {
     }
 
     reader.readAsDataURL(file)
-
     
+    setIsUploadedImage(true);
+
+    sendImage(file)
+      .then((res) => {
+        console.log("res", res)
+      })
+      .catch((e) => {
+        console.log("Error:", e)
+      })
+
 
   }, [])
+
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
 
-  useEffect(() => {
-    console.log("fileDataUrl", fileDataURL)
-  }, [fileDataURL])
-
   return (
     <div className="App">
-      
+
       {/* <header className="App-header">
         Colourizing black&white Images With GANs
 
       </header> */}
       <main className="App-main" >
         <div {...getRootProps({
-          style: {border: '20px solid #27829b', padding: '0px 20px', display: 'flex', justifyContent: 'center', alignItems: 'center'}
+          style: { border: '20px solid #27829b', padding: '0px 20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }
         })}>
           <input {...getInputProps()} />
           <p>Drag 'n' drop some files here, or click to select files</p>
         </div>
+
         <div className="image">
-          {fileDataURL && <img src={fileDataURL} width="200px" height="200px" alt="preview" />}
-          {fileDataURL && <img src={arrowIcon} width="200px" height="200px" alt="preview" />}
-          {fileDataURL && <img src={fileDataURL} width="200px" height="200px" alt="preview" />}
+          {isUploadedImage && <img src={fileDataURL} width="200px" height="200px" alt="preview" />}
+          {isUploadedImage && <img src={arrowIcon} width="200px" height="200px" alt="preview" />}
+          {!processedImage && isUploadedImage && <img src={loadingIcon} width="200px" height="200px" alt="preview" />}
+          {processedImage && isUploadedImage && <img src={fileDataURL} width="200px" height="200px" alt="preview" />}
         </div>
 
       </main>
