@@ -2,10 +2,12 @@ import os
 from flask import Flask, flash, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 import pathlib
+from flask_cors import CORS
 from config import *
 from utils import *
 
 app = Flask(__name__)
+CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/uploads/<filename>', methods=['GET'])
