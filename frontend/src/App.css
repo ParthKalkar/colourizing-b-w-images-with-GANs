@@ -43,3 +43,19 @@ img {
   margin: 50px 70px;
   
 }
+
+.image {
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  margin-left: 270px;
+}
+
+.loadingImage {
+  margin-left: 180px;
+
+}
