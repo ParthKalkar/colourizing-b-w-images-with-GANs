@@ -23,7 +23,7 @@ The project is divided into three parts that are:
 3. Download the [model](https://drive.google.com/drive/folders/1VhotvmQcCcPtLSGMyLe5LoDXkMC0F8Ql) and save it into the project folder.
 4. Use command below to install required dependencies `python -m pip install -r requirements.txt`
 5. Start the back-end by command given `python app.py`
-6. Start the front-end `npm install && npm run dev`
+6. Start the front-end `npm install && npm start`
 7. You can now upload image and check the generated result.
 
 # Interface
