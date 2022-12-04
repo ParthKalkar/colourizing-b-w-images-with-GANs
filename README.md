@@ -20,7 +20,7 @@ The project is divided into three parts that are:
 # Run
 1. Create a copy of the project.
 2. Open command prompt and change you current path to folder where you can find `app.py` file.
-3. Download the model and save it into the project folder.
+3. Download the [model](https://drive.google.com/drive/folders/1VhotvmQcCcPtLSGMyLe5LoDXkMC0F8Ql) and save it into the project folder.
 4. Use command below to install required dependencies `python -m pip install -r requirements.txt`
 5. Start the back-end by command given `python app.py`
 6. Start the front-end `npm install && npm run dev`
