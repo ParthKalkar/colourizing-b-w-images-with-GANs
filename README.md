@@ -27,3 +27,20 @@ The project is divided into three parts that are:
 7. You can now upload image and check the generated result.
 
 # Interface
+
+Our web application provide the ability of uploading a gray image and our system will do the work to run the model and colorize the given image.
+
+![fs](https://i.ibb.co/NxbGScW/Screenshot-2022-12-05-at-15-56-33.png)
+
+
+Then the image will be sent to our backend so that the model can process it, colorize it, and send it back to the frontend
+
+![fd](https://i.ibb.co/sRRtm40/Screenshot-2022-12-05-at-15-57-09.png)
+
+
+And this is how the resulting image appears
+
+![fs](https://i.ibb.co/QDx2Gkf/Screenshot-2022-12-05-at-15-57-26.png)
+
+
+# [Demo](https://www.loom.com/share/c7e975e6618a4d31975fb6ba04f110cb)
